@@ -1,0 +1,35 @@
+﻿@{
+    Layout = null;
+}﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/site.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.3/signalr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.min.js"></script>
+    <script src="~/js/site.js"></script>
+    <title>Task 3</title>
+</head>
+<body>
+    <h2 class="text-center" style="margin-top: 0; padding-top: 30px; padding-bottom: 30px;">Itransition task 3 (Chat)</h2>
+
+    <div class="input-group container">
+        <input type="text" class="form-control" id="username" value="bvz Anonymous" placeholder="Имя имя пользователя" aria-label="Имя пользователя" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <input type="button" class="btn btn-primary" id="enterusername" value="Войти" />
+            <input type="button" class="btn btn-danger" id="renameuser" value="Сменить имя" />
+        </div>
+    </div>
+    <div class="container" style="height: calc(100% - 110px);">
+        <div id="messages" style="background-color: whitesmoke; "></div>
+        <div style="width: 100%; border-left-style: ridge; border-right-style: ridge;">
+            <input type="text" id="message" class="form-control" style="width: 100%; padding: 5px 10px;"
+                   placeholder="Введите сообщение" />
+        </div>
+        <div style="overflow: auto; border-style: ridge; border-top-style: hidden;">
+            <button class="btn btn-success" id="sendmessage">Отправить</button>
+        </div>
+    </div>
+</body>
+</html>
