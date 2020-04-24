@@ -20,6 +20,11 @@ namespace Task3_1.Controllers
 
         public IActionResult Index()
         {
+            using(MessageContext messageContext = new MessageContext())
+            {
+                var mm = messageContext.Messages.ToList();
+                ViewBag.Messages = mm;
+            }
             return View();
         }
 

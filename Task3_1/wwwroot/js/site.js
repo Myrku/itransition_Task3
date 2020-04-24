@@ -1,7 +1,26 @@
 ﻿var connection;
 var sendmesgg;
-document.addEventListener('DOMContentLoaded', function () {
+var emoji = new Map([
+    [':)', '😀'],
+    [':D', '😁'],
+    [';)', '😉'],
+    ['xD', '🤣'],
+    [';p', '😋'],
+    ['8)', '😍'],
+    ['B)', '😎'],
+    [':(', '🙁'],
+    ['3(', '😔'],
+    [':\'(', '😢'],
+    [':_(', '😭'],
+    [':o', '😯'],
+    [':|', '😐'],
+    ['<3', '❤️'],
+    [':like', '👍'],
+    [':dislike', '👎'],
+    [':up', '☝️'],
+]);
 
+document.addEventListener('DOMContentLoaded', function () {
 
     let counter = 1;
     var oldmessage;
@@ -10,6 +29,20 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('username').value = c;
     }
 
+    var n = document.getElementById('username').value;
+    var array = document.getElementById('messages').getElementsByClassName('message-entry');
+    for (var i = 0; i < array.length; i++) {
+        if (array[i].children[0].textContent == n) {
+            console.log(array[i]);
+            array[i].children[0].remove();
+            array[i].children[0].classList.remove('pull-left');
+            array[i].children[0].classList.add('float-md-right');
+        }
+    }
+
+    function sortmessage() {
+
+    }
     var converter = new showdown.Converter();
     var markdow_to_html;
     document.getElementById('username').focus();
@@ -120,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         connection.on('broadcastMessage', messageCallback);
     }
-    function sendmesg (event) {
+    function sendmesg(event) {
         if (messageInput.value) {
             console.log("send");
             connection.send('broadcastMessage', username, messageInput.value);
@@ -185,6 +218,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 
+$(document).on("input", function (ev) {
+    var text = document.getElementById('message');
+    for (let key of emoji.keys()) {
+        if (text.value.includes(key)) {
+            console.log(emoji.get(key));
+
+            text.value = text.value.replace(key, emoji.get(key));
+        }
+    }
+});
 
 function deletemessage(obj) {
     var str = obj.id;
@@ -217,7 +260,7 @@ function sendedit(event) {
     console.log('oldmessage ' + oldmessage);
     console.log('newmessage ' + newmessage);
     connection.send('broadcastMessage', '_SYSTEM_', '[' + oldmessage + ']' + ' edit {' + newmessage + '}');
-    
+
     document.getElementById('sendmessage').removeEventListener('click', sendedit);
     document.getElementById('sendmessage').addEventListener('click', sendmesgg);
 
